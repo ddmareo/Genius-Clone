@@ -1,8 +1,34 @@
+import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { getDocs, collection } from 'firebase/firestore';
+import {db} from "../firebase/firebase.js"
+import SearchBar from "../components/search.jsx"
 
 const Nav3 = () => {
+  const [song, setSong] = useState();
   const navigate = useNavigate();
+  const [params] = useSearchParams();
+
+  const getData = () => {
+    const col = collection(db, 'songs');
+    getDocs(col).then(result => {
+      // dalam hasil result disini ada banyak dokumen (.docs)
+      const documents = result.docs
+
+      const dataList = []
+      for(let i = 0; i < documents.length; i++) {
+        const data = documents[i].data()
+        dataList.push(data)
+      }
+
+      const name = params.get("name");
+
+      const song = dataList.filter(song => song.title == name)[0];
+      setSong(song)
+    })
+  }
 
   const handleNavigation = (targetId) => {
     navigate(`/#${targetId}`);
@@ -10,6 +36,10 @@ const Nav3 = () => {
       document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   };
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <div>
@@ -28,21 +58,20 @@ const Nav3 = () => {
           <button className="bg-black text-white font-bold py-1 px-4 rounded-full hover:bg-gray-700">
             Analyze Now
           </button>
-          <Link to="/signup" className="hover:underline">SIGN UP</Link>
-          <Link to="/signin" className="hover:underline">SIGN IN</Link>
+          <div> <SearchBar/></div>
         </div>
       </div>
 
       <div className="p-6 flex items-center space-x-6 ml-20">
         <img
-          src="https://via.placeholder.com/500x500"
+          src={song?.imageUrl}
           alt="Song Cover"
           className="w-64 h-64 object-cover"
         />
         <div style={{ maxWidth: '1000px' }}>
-          <h1 className="text-4xl font-bold mb-2">Song Title</h1>
-          <h2 className="text-2xl mb-3">Artist Name</h2>
-          <p className="text-lg text-justify">Mr. Loverman was released on April 6th, 2016. The song is about Montgomery’s father dealing with the loss/break-up of his partner using alcohol and questioning himself. Throughout the song, the man refers to himself as “Mr. Loverman” as he defines himself as a lover; he has lost his identity as any other being and now feels incomplete.</p>
+          <h1 className="text-4xl font-bold mb-2">{song?.title}</h1>
+          <h2 className="text-2xl mb-3">{song?.artist}</h2>
+          <p className="text-lg text-justify">{song?.description}</p>
         </div>
       </div>
     </div>

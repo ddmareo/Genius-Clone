@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getDocs, collection } from 'firebase/firestore';
+import {db} from "../firebase/firebase.js"
+import { Link } from 'react-router-dom' 
 
 const Charts = () => {
   const [sortOrder, setSortOrder] = useState('descending');
   const [sortType, setSortType] = useState('popularity');
-  
-  const songs = [
-    { number: 1, title: 'Song One', artist: 'Artist One', imageUrl: 'https://via.placeholder.com/100x100' },
-    { number: 2, title: 'Song Two', artist: 'Artist Two', imageUrl: 'https://via.placeholder.com/100x100' },
-    { number: 3, title: 'Song Three', artist: 'Artist Three', imageUrl: 'https://via.placeholder.com/100x100' },
-    { number: 4, title: 'Song Four', artist: 'Artist Four', imageUrl: 'https://via.placeholder.com/100x100' },
-    { number: 5, title: 'Song Five', artist: 'Artist Five', imageUrl: 'https://via.placeholder.com/100x100' },
-    // Add more songs here
-  ];
+  const [songs, setSongs] = useState([]);
+
+  const getData = () => {
+    const col = collection(db, 'songs');
+    getDocs(col).then(result => {
+      // dalam hasil result disini ada banyak dokumen (.docs)
+      const documents = result.docs
+
+      const dataList = []
+      for(let i = 0; i < documents.length; i++) {
+        const data = documents[i].data()
+        dataList.push(data)
+      }
+
+      setSongs(dataList)
+    })
+  }
 
   const handleSortChange = (e) => {
     setSortType(e.target.value);
@@ -21,8 +32,13 @@ const Charts = () => {
     setSortOrder(e.target.value);
   };
 
+  // pas halaman ngeload dia jalanin yang didalem sini
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
-    <div className="max-w-6xl mx-auto p-2 mt-5">
+    <div className="mx-auto mt-8" style={{ maxWidth: '1216px' }}>
     
     <h2 className="text-4xl font-bold mb-6">CHARTS</h2>
 
@@ -55,14 +71,16 @@ const Charts = () => {
 
       <div className="bg-white shadow rounded-lg divide-y divide-gray-200">
         {songs.map((song, index) => (
+          <Link to={'/lyrics?name=' + song.title} >
           <div key={index} className="flex items-center p-4">
-            <div className="w-10 text-lg font-bold">{song.number}</div>
+            <div className="w-10 text-lg font-bold">{index + 1}</div>
             <img src={song.imageUrl} alt={song.title} className="w-16 h-16 rounded mr-4" />
             <div className="flex flex-col">
               <span className="font-bold text-gray-900">{song.title}</span>
               <span className="text-gray-600">{song.artist}</span>
             </div>
           </div>
+          </Link>
         ))}
       </div>
 
