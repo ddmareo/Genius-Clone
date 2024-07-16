@@ -5,7 +5,7 @@ const lyricspage = () => {
   return (
     <div>
 
-      <div className="h-96" style={{ backgroundColor: "#ffff64" }}>
+      <div className="h-96" style={{ backgroundColor: "#222222" }}>
         <Nav3/>
       </div>
 

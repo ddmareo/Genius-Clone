@@ -11,7 +11,7 @@ const home = () => {
         <Nav/>
       </div>
 
-      <div className="h-10" style={{ backgroundColor: "#000000" }}>
+      <div className="h-10" style={{ backgroundColor: "#222222" }}>
         <Nav2/>
       </div>
 
@@ -23,7 +23,7 @@ const home = () => {
         <MusicChart/>
       </div>
 
-      <div className="mt-16">
+      <div className="mt-16" style={{ backgroundColor: "#222222" }}>
         <About/>
       </div>
     </div>

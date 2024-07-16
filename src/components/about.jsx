@@ -1,7 +1,7 @@
 const about = () => {
 
   return (
-    <div className="bg-black bg-opacity-90 text-white flex justify-center items-center">
+    <div className="text-white flex justify-center items-center">
       <div className="max-w-md p-8">
         <h1 className="text-3xl font-bold mb-4 text-center">About Genius-Clone</h1>
         <p className="text-lg text-justify">

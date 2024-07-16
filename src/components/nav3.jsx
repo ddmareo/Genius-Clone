@@ -44,9 +44,9 @@ const Nav3 = () => {
   return (
     <div>
       <div className="relative flex items-center p-3 mx-2">
-        <Link to="/" className="text-2xl font-bold">G E N I U S</Link>
+        <Link to="/" className="text-2xl font-bold text-white">G E N I U S</Link>
 
-        <div className="flex items-center justify-center lg:flex-row text-black ml-8">
+        <div className="flex items-center justify-center lg:flex-row text-white ml-8">
           <div className="space-x-6 flex items-center">
             <button onClick={() => handleNavigation('featured-card')} className="hover:underline">FEATURED</button>
             <button onClick={() => handleNavigation('music-chart')} className="hover:underline">CHARTS</button>
@@ -55,23 +55,23 @@ const Nav3 = () => {
         </div>
 
         <div className="ml-auto space-x-4 flex items-center justify-end">
-          <button className="bg-black text-white font-bold py-1 px-4 rounded-full hover:bg-gray-700">
+          <button className="bg-yellow-300 text-black font-bold py-0.5 px-4 rounded-full hover:bg-yellow-500">
             Analyze Now
           </button>
           <div> <SearchBar/></div>
         </div>
       </div>
 
-      <div className="p-7 flex items-center space-x-6 ml-36">
+      <div className="p-7 flex items-center space-x-7 ml-36">
         <img
           src={song?.imageUrl}
           alt="Song Cover"
           className="w-64 h-64 object-cover"
         />
         <div style={{ maxWidth: '1000px' }}>
-          <h1 className="text-4xl font-bold mb-2">{song?.title}</h1>
-          <h2 className="text-2xl mb-3">{song?.artist}</h2>
-          <p className="text-lg text-justify">{song?.description}</p>
+          <h1 className="text-4xl text-white font-bold mb-2">{song?.title}</h1>
+          <h2 className="text-2xl mb-3 text-white">{song?.artist}</h2>
+          <p className="text-lg text-justify text-white">{song?.description}</p>
         </div>
       </div>
     </div>

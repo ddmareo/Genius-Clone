@@ -11,7 +11,7 @@ const searchpage = () => {
           <Nav/>
         </div>
 
-        <div className="h-10" style={{ backgroundColor: "#000000" }}>
+        <div className="h-10" style={{ backgroundColor: "#222222" }}>
           <Nav2/>
         </div>
 
