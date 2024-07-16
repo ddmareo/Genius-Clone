@@ -62,7 +62,7 @@ const Nav3 = () => {
         </div>
       </div>
 
-      <div className="p-6 flex items-center space-x-6 ml-20">
+      <div className="p-7 flex items-center space-x-6 ml-36">
         <img
           src={song?.imageUrl}
           alt="Song Cover"
