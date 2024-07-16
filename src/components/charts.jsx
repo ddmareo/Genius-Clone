@@ -7,6 +7,7 @@ const Charts = () => {
   const [sortOrder, setSortOrder] = useState('descending');
   const [sortType, setSortType] = useState('popularity');
   const [songs, setSongs] = useState([]);
+  const [visibleSongs, setVisibleSongs] = useState(5);
 
   const getData = () => {
     const col = collection(db, 'songs');
@@ -32,10 +33,39 @@ const Charts = () => {
     setSortOrder(e.target.value);
   };
 
+  const showMoreSongs = () => {
+    setVisibleSongs((prevVisibleSongs) => prevVisibleSongs + 5);
+  };
+
+  const compareSongs = (a, b) => {
+    if (sortType === 'popularity') {
+      // Sort by viewsCount
+      if (sortOrder === 'ascending') {
+        return a.viewsCount - b.viewsCount;
+      } else {
+        return b.viewsCount - a.viewsCount;
+      }
+    } else if (sortType === 'releaseDate') {
+      // Assuming releaseDate is a Firestore Timestamp
+      if (sortOrder === 'ascending') {
+        return a.releaseDate.toDate() - b.releaseDate.toDate(); 
+      } else {
+        return b.releaseDate.toDate() - a.releaseDate.toDate();
+      }
+    }
+  };
+
   // pas halaman ngeload dia jalanin yang didalem sini
   useEffect(() => {
     getData()
   }, [])
+
+  useEffect(() => {
+    if (songs.length > 0) {
+      const sortedSongs = [...songs].sort(compareSongs);
+      setSongs(sortedSongs);
+    }
+  }, [sortType, sortOrder]);
 
   return (
     <div className="mx-auto mt-8" style={{ maxWidth: '1216px' }}>
@@ -51,7 +81,6 @@ const Charts = () => {
             onChange={handleSortChange} 
             className="bg-white border border-gray-300 rounded px-2 py-1">
             <option value="popularity">Popularity</option>
-            <option value="rating">Rating</option>
             <option value="releaseDate">Release Date</option>
           </select>
         </div>
@@ -70,7 +99,7 @@ const Charts = () => {
       </div>
 
       <div className="bg-white shadow rounded-lg divide-y divide-gray-200">
-        {songs.map((song, index) => (
+        {songs.slice(0, visibleSongs).map((song, index) => (
           <Link to={'/lyrics?name=' + song.title} >
           <div key={index} className="flex items-center p-4">
             <div className="w-10 text-lg font-bold">{index + 1}</div>
@@ -83,6 +112,17 @@ const Charts = () => {
           </Link>
         ))}
       </div>
+
+      {visibleSongs < songs.length && ( 
+      <div className='flex justify-center items-center'>
+        <button
+          onClick={showMoreSongs}
+          className="mt-8 px-4 py-2 bg-black text-white rounded hover:bg-gray-600"
+        >
+          Load More
+        </button>
+      </div>
+      )}
 
     </div>
   );

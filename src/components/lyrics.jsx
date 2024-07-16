@@ -31,7 +31,7 @@ const lyrics = () => {
   }, [])
 
   return (
-    <div className="ml-44 mt-10 mb-24 max-w-xl">
+    <div className="ml-44 mt-10 mb-24">
       {song?.lyrics.map((line, index) => (
         line === '' ? 
           <br key={index} /> : 

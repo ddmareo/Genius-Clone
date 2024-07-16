@@ -23,7 +23,7 @@ const home = () => {
         <MusicChart/>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-16">
         <About/>
       </div>
     </div>
