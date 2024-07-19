@@ -14,9 +14,6 @@ importers:
       '@tailwindcss/line-clamp':
         specifier: ^0.4.4
         version: 0.4.4(tailwindcss@3.4.4)
-      dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
       firebase:
         specifier: ^10.12.3
         version: 10.12.3
@@ -42,6 +39,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
