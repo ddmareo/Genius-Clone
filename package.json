@@ -12,6 +12,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.15.0",
     "@tailwindcss/line-clamp": "^0.4.4",
+    "dotenv": "^16.4.5",
     "firebase": "^10.12.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

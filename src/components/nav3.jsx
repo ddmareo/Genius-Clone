@@ -12,8 +12,7 @@ const Nav3 = () => {
   const [song, setSong] = useState();
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const API_KEY = 'AIzaSyAgvKL0iJioxxWKrze_2YqFC75XYwuMsCA'
-  const genAI = new GoogleGenerativeAI(API_KEY);
+  const genAI = new GoogleGenerativeAI(process.env.REACT_APP_API_KEY);
   const [analysisText, setAnalysisText] = useState(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
