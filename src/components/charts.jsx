@@ -117,7 +117,7 @@ const Charts = () => {
       <div className='flex justify-center items-center'>
         <button
           onClick={showMoreSongs}
-          className="mt-8 px-4 py-2 bg-black text-white rounded hover:bg-gray-600"
+          className="mt-8 px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
         >
           Load More
         </button>

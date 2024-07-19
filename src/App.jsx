@@ -3,8 +3,9 @@ import Home from "./pages/home"
 import LyricsPage from './pages/lyricspage'
 import SearchPage from './pages/searchpage'
 
+
 function App() {
-  
+
   return (
 
     <Router>

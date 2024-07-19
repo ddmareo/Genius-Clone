@@ -5,11 +5,17 @@ import React, { useEffect, useState } from 'react';
 import { getDocs, collection } from 'firebase/firestore';
 import {db} from "../firebase/firebase.js"
 import SearchBar from "../components/search.jsx"
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 
 const Nav3 = () => {
   const [song, setSong] = useState();
   const navigate = useNavigate();
   const [params] = useSearchParams();
+  const API_KEY = 'AIzaSyAgvKL0iJioxxWKrze_2YqFC75XYwuMsCA'
+  const genAI = new GoogleGenerativeAI(API_KEY);
+  const [analysisText, setAnalysisText] = useState(null);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const getData = () => {
     const col = collection(db, 'songs');
@@ -37,6 +43,44 @@ const Nav3 = () => {
     }, 100);
   };
 
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_NONE,
+    },
+  ];
+
+  async function runAnalysis() {
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", safetySettings });
+      const prompt = "Please provide an analysis of the meaning of the song lyrics in paragraph format. Here are the lyrics: " + song?.lyrics;
+      const result = await model.generateContent(prompt);
+      setAnalysisText(result.response.text());
+      setIsPopupVisible(true); 
+    } catch (error) {
+      console.error("Error analyzing song:", error);
+      setAnalysisText("An error occurred while analyzing the song.");
+      setIsPopupVisible(true);
+    }
+  }
+
+  const closePopup = () => {
+    setIsPopupVisible(false);
+    setTimeout(() => setAnalysisText(null), 500);
+  };
+
   useEffect(() => {
     getData()
   }, [])
@@ -55,7 +99,7 @@ const Nav3 = () => {
         </div>
 
         <div className="ml-auto space-x-4 flex items-center justify-end">
-          <button className="bg-yellow-300 text-black font-bold py-0.5 px-4 rounded-full hover:bg-yellow-500">
+          <button onClick={runAnalysis} className="bg-yellow-300 text-black font-bold py-0.5 px-4 rounded-full hover:bg-yellow-500">
             Analyze Now
           </button>
           <div> <SearchBar/></div>
@@ -66,7 +110,7 @@ const Nav3 = () => {
         <img
           src={song?.imageUrl}
           alt="Song Cover"
-          className="w-64 h-64 object-cover"
+          className="w-64 h-64 object-cover rounded"
         />
         <div style={{ maxWidth: '1000px' }}>
           <h1 className="text-4xl text-white font-bold mb-2">{song?.title}</h1>
@@ -74,6 +118,22 @@ const Nav3 = () => {
           <p className="text-lg text-justify text-white">{song?.description}</p>
         </div>
       </div>
+
+      {analysisText && (
+        <div className={`fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50 ${isPopupVisible ? 'animate-fadeIn' : 'animate-fadeOut'}`}>
+          <div className={`bg-white max-w-screen-xl p-8 rounded-lg relative ${isPopupVisible ? 'animate-scaleIn' : 'animate-scaleOut'}`}>
+            <button 
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" 
+              onClick={closePopup}
+            >
+              ✖
+            </button>
+            <h2 className='text-2xl font-bold flex items-center justify-center mb-7'>Lyrics Analyzation of "{song?.title}" by {song?.artist}</h2>
+            <p className="text-lg flex text-justify">{analysisText}</p>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

@@ -30,7 +30,7 @@ const searchpagecomp = () => {
 
   return (
     <div className="container mx-auto p-4 mt-5">
-      <h1 className="text-3xl font-bold mb-4 flex justify-center">Search Results</h1>
+      <h1 className="text-3xl font-bold mb-4 flex justify-center">Search Results for "{params.get("name")}"</h1>
 
       {songs.length > 0 ? ( // Conditionally render results or "No results"
         <div className="space-y-4"> 

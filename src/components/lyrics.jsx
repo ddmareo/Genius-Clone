@@ -25,7 +25,7 @@ const lyrics = () => {
       setSong(song)
     })
   }
-
+  
   useEffect(() => {
     getData()
   }, [])
