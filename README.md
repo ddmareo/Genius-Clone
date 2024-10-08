@@ -9,6 +9,7 @@ Make sure you have **Node.js** installed on your machine. This project uses **pn
 ### Install `pnpm` globally:
 ```bash
 npm install -g pnpm
+```
 
 ## Getting Started
 
