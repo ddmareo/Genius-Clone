@@ -1,7 +1,8 @@
 # Genius-Clone
 
-Genius-Clone is an online music encyclopedia inspired by Genius, designed for diehard music enthusiasts, featuring verified lyrics from artists for accuracy. It utilizes AI to help users explore the themes, emotions, and contexts of songs, providing deeper insights into their meaning. Additionally, it includes a music chart system that allows users to sort songs by rating, popularity, or release date, keeping them updated on current music trends. Built as a fast and optimized React application with Vite and pnpm for efficient dependency management, Genius-Clone also integrates Firebase for backend services, including authentication, real-time databases, and hosting.
+Genius-Clone is an online music encyclopedia inspired by Genius, designed for diehard music enthusiasts, featuring verified lyrics from artists for accuracy. It utilizes AI to help users explore the themes, emotions, and contexts of songs, providing deeper insights into their meaning. Additionally, it includes a music chart system that allows users to sort songs by rating, popularity, or release date, keeping them updated on current music trends. 
 
+This project is a fast and optimized React application built with [Vite](https://vitejs.dev/) as the build tool, using [pnpm](https://pnpm.io/) as the package manager for efficient and reliable dependency management. Additionally, this project integrates [Firebase](https://firebase.google.com/) for backend services, providing features like authentication, real-time databases, and hosting. It also uses [Tailwind CSS](https://tailwindcss.com/) for styling, enabling a responsive and customizable design.
 
 ## Prerequisites
 
@@ -11,7 +12,6 @@ Make sure you have **Node.js** installed on your machine. This project uses **pn
 ```bash
 npm install -g pnpm
 ```
-
 
 ## Getting Started
 
@@ -44,4 +44,5 @@ For more information about Vite, pnpm, and Firebase, refer to the following reso
 - [Vite Documentation](https://vitejs.dev/guide/)
 - [pnpm Documentation](https://pnpm.io/)
 - [Firebase Documentation](https://firebase.google.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 
