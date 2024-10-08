@@ -17,8 +17,8 @@ Follow the steps below to get the project up and running locally.
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository_url>
-cd <project_directory>
+git clone https://github.com/ddmareo/genius-clone.git
+cd genius-clone
 ```
 
 ### 2. Install Dependencies
