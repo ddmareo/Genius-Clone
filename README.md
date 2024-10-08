@@ -2,6 +2,7 @@
 
 Genius-Clone is an online music encyclopedia inspired by Genius, designed for diehard music enthusiasts, featuring verified lyrics from artists for accuracy. It utilizes AI to help users explore the themes, emotions, and contexts of songs, providing deeper insights into their meaning. Additionally, it includes a music chart system that allows users to sort songs by rating, popularity, or release date, keeping them updated on current music trends. Built as a fast and optimized React application with Vite and pnpm for efficient dependency management, Genius-Clone also integrates Firebase for backend services, including authentication, real-time databases, and hosting.
 
+
 ## Prerequisites
 
 Make sure you have **Node.js** installed on your machine. This project uses **pnpm** as the package manager, so you will need to install pnpm globally if you haven’t already.
@@ -10,6 +11,7 @@ Make sure you have **Node.js** installed on your machine. This project uses **pn
 ```bash
 npm install -g pnpm
 ```
+
 
 ## Getting Started
 
@@ -25,6 +27,8 @@ cd genius-clone
 ```bash
 pnpm install
 ```
+
+Install the required dependencies by running:
 
 ### 3. Run the Development Server
 ```bash
