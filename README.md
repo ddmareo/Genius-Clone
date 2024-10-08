@@ -24,11 +24,12 @@ cd genius-clone
 ```
 
 ### 2. Install Dependencies
+
+Install the required dependencies by running:
+
 ```bash
 pnpm install
 ```
-
-Install the required dependencies by running:
 
 ### 3. Run the Development Server
 ```bash
