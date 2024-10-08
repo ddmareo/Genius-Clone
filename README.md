@@ -1,1 +1,11 @@
-Genius-Clone is an online music encyclopedia inspired by Genius, designed for diehard music enthusiasts. Unlike the original platform, Genius-Clone focuses on verified lyrics directly from artists, ensuring accuracy. It also uses AI to help users explore the themes, emotions, and contexts of songs, offering deeper insights into their meaning. Additionally, Genius-Clone features a music chart system that allows users to sort songs by rating, popularity, or release date, making it easy to stay updated on current music trends.
+# Vite React Project
+
+This project is a fast and optimized React application built with [Vite](https://vitejs.dev/) as the build tool, using [pnpm](https://pnpm.io/) as the package manager for efficient and reliable dependency management.
+
+## Prerequisites
+
+Make sure you have **Node.js** installed on your machine. This project uses **pnpm** as the package manager, so you will need to install pnpm globally if you haven’t already.
+
+### Install `pnpm` globally:
+```bash
+npm install -g pnpm
